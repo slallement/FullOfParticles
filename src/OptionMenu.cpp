@@ -1,4 +1,5 @@
 #include "OptionMenu.h"
+#include "Config.h"
 
 OptionMenu::OptionMenu(sf::RenderWindow & win):
  Menu(win)
@@ -6,12 +7,12 @@ OptionMenu::OptionMenu(sf::RenderWindow & win):
     sf::Text t = sf::Text("Resolution",*FontManager::getFont("ressources/Symtext.ttf"),32);
     option.resize(1);
 
-    float pos_offset = 100.f;
+    float pos_offset = 0.01f;
 
     centerTextOnxAxis(t, pos_offset);
     option[0].txt = t;
     option[0].f = static_cast<void (Menu::*)()>(&OptionMenu::changeResolution);
-    pos_offset += 40.f;
+    pos_offset += 0.05f;
 
     // resolution modes
     offset_opt_resolution = 1;
@@ -21,7 +22,7 @@ OptionMenu::OptionMenu(sf::RenderWindow & win):
         if(Modes[i].bitsPerPixel < 32)
             continue;
         t.setString( ttos(Modes[i].width) + "x" + ttos(Modes[i].height) );
-        pos_offset += 20.f;
+        pos_offset += 0.05f;
         centerTextOnxAxis(t, pos_offset);
 
         Button b;
@@ -30,7 +31,7 @@ OptionMenu::OptionMenu(sf::RenderWindow & win):
         option.push_back(b);
     }
     t.setCharacterSize(32);
-    pos_offset += 40.f;
+    pos_offset += 0.1f;
     //---
 
     t.setString("Return to main menu");
@@ -47,7 +48,7 @@ OptionMenu::~OptionMenu()
 
 void OptionMenu::initPosition(){
     Menu::initPosition();
-    recenterOptions();
+    //recenterOptions();
 }
 
 void OptionMenu::changeResolution()
@@ -59,8 +60,10 @@ void OptionMenu::changeResolution()
     //window = sf::RenderWindow(window(sf::VideoMode(1600, 900), "Dodger King",sf::Style::Fullscreen);
     sf::VideoMode videomode = sf::VideoMode::getFullscreenModes()[opt];
     if(videomode.isValid()){
-        window.create(videomode, "Dodger King");
+        const sf::Vector2f oldsize = window.getDefaultView().getSize();
+        window.create(videomode, Config::TITLE_WINDOW);
         initPosition();
+        recenterOptions(oldsize);
     }
 
 }

@@ -6,7 +6,7 @@ void main()
 {
     // transform the vertex position
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-	//vTexCoord = gl_Position*0.5+0.5;
+	vTexCoord = gl_Position.xy*0.5+0.5;
 
     // transform the texture coordinates
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

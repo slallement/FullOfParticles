@@ -14,22 +14,28 @@ void MissionMenu::makeMenu()
 {
     option.clear();
     option.reserve(missions.size());
-    sf::Text t = sf::Text("",*FontManager::getFont("ressources/Symtext.ttf"),32);
-    centerTextOnxAxis(t,300.f);
     for(unsigned int i=0;i<missions.size();i++){
         std::string s = "Mission "+missions.getMissionName(i)+(missions.getMissionState(i)?"":" (locked) ");
-        t.setString(s);
-        centerTextOnxAxis(t,300.f+50.f*i);
         Button button;
-        button.txt = t;
+        button.txt = sf::Text(s,*FontManager::getFont("ressources/Symtext.ttf"),32);
         button.f = static_cast<void (Menu::*)()>(&MissionMenu::startMission);
         option.push_back(button);
     }
+
+    option.resize(option.size()+1);
+    option.back().txt = sf::Text("Return to main menu",*FontManager::getFont("ressources/Symtext.ttf"),32);
+    option.back().f = &Menu::exit;
+
+    initPosition();
 }
 
 void MissionMenu::initPosition(){
     Menu::initPosition();
-    recenterOptions();
+     for(unsigned int i=0;i<missions.size();i++){
+        centerTextOnxAxis(option[i].txt,1.f*(i+1)/(missions.size()+2));
+    }
+    int i = missions.size();
+    centerTextOnxAxis(option[i].txt,1.f*(i+1)/(missions.size()+2));
 }
 
 void MissionMenu::loadBackground()

@@ -1,5 +1,5 @@
 
-#include "MissionState_1.h"
+#include "../include/missions/MissionState_1.h"
 #include "Utils.h"
 
 MissionState1_1::MissionState1_1(Mission* m, MissionState* n):
@@ -170,12 +170,7 @@ void MissionState1_2::init()
 
 void MissionState1_2::update(float)
 {
-    //MissionContext const& context = mission->getContext();
     if(context->game->getRemainingEnnemyLife() != 0){
-        /*lifebar.setScale(271.f*context->game->getRemainingEnnemyLife()/
-                         context->game->getRemainingEnnemyLifeMax(),1.f);
-        context->layer_game->draw(lifebar);
-        context->layer_game->draw(lifebarBorder);*/
         lifebar.update((float)context->game->getRemainingEnnemyLife()/
                          context->game->getRemainingEnnemyLifeMax());
         context->layer_game->draw(lifebar);

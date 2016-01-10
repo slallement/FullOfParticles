@@ -255,7 +255,7 @@ bool Game::run()
 
         initPlayer();
 
-        txt_time.setPosition(window.getDefaultView().getSize().x-200,10);
+        txt_time.setPosition(window.getDefaultView().getSize().x-150,10);
 
         window.setFramerateLimit(FR_LIMIT);
 
@@ -358,7 +358,7 @@ bool Game::run()
         manageBonus();
 
         // information text
-        txt_time.setString("Temps écoulé: "+ttos(elapsed_info.getElapsedTime().asSeconds())
+        txt_time.setString("Temps: "+ttos(elapsed_info.getElapsedTime().asSeconds())
                            +"\nVies: "+ttos(player.getLives())
                            +"\nDef: "+ttos(player.getShiled()->getDefense())
                            +"\nfps: "+ttos(getFrameRate()) );
@@ -535,8 +535,6 @@ void Game::manageBulletCollision(){
                         putBonus((*it));
                         // effect of explosion
                         decor.push_back(new EffectExplosion(it->getPos(),*(*it).getSprite().getTexture()));
-                        /*decor.back()->setTexture(
-                                *(*it).getSprite().getTexture(),true);*/
                         it = enemies.erase(it);
                         nbKill++;
 
@@ -555,56 +553,23 @@ void Game::manageBulletCollision(){
 
 inline void Game::putBonus(Ship& it)
 {
-    /*{
-        bonus.push_back(ShipBonus(ShipBonus::IMPROVE_RATE1));
-        bonus.back().getSprite().setPosition(it.getSprite().getPosition());
-        return;
-    }*/
-    if(it.getLivesMax() < 8){
-        float luck = rand() % 100;
-        if(luck < 20){
-            bonus.push_back(ShipBonus(ShipBonus::LIFE_LV1));
-            bonus.back().getSprite().setPosition(it.getSprite().getPosition());
-        }else if (luck < 30){
-            bonus.push_back(ShipBonus(ShipBonus::SHILED_LV1));
-            bonus.back().getSprite().setPosition(it.getSprite().getPosition());
-        }
-    }else{
-        //float luck = rand() % ;
-        int points = it.getLivesMax();
-        static const unsigned int possibilities[] = {0,1,
-                                            ShipBonus::SHILED_LV1,30,
-                                            ShipBonus::LIFE_LV1,40,
-                                            ShipBonus::IMPROVE_RATE1,200};
-        static const unsigned int possibilities_size =  sizeof(possibilities)/sizeof(possibilities[0])/2;
-        unsigned int best = 0;
-        while(points>=(int)possibilities[2*best+1])
-        {
-            ++best;
-        }
-        if(best >= possibilities_size) { // avoid beeing out of bounds
-            best = possibilities_size-1;
-        }
-        if(best == 0){
-            return;
-        }
-        // best >= 1 here
-        bonus.push_back(ShipBonus(possibilities[2*best]));
-        bonus.back().getSprite().setPosition(it.getSprite().getPosition());
-        points -= possibilities[2*best+1];
+    if(it.getLivesMax() > 1){
 
-        while(points > 0 && best >= 1){
-            unsigned int luck = rand()%best;
-            if(luck > 0){
-                bonus.push_back(ShipBonus(possibilities[2*luck])); // crash ?
-                bonus.back().getSprite().setPosition(
-                                                it.getSprite().getPosition());
-                float dx = 100.f*((float)rand()/(float)RAND_MAX-0.5f);
-                float dy = 40.f*((float)rand()/(float)RAND_MAX-0.5f);
-                bonus.back().getSprite().move(dx,dy);
-            }
-            points -= possibilities[2*luck+1];
+        int points = it.getLivesMax();
+        static const unsigned int possibilities[] = {0,
+                                            ShipBonus::SHILED_LV1,
+                                            ShipBonus::LIFE_LV1,
+                                            ShipBonus::IMPROVE_RATE1};
+        static const unsigned int possibilities_size = sizeof(possibilities)/sizeof(possibilities[0]);
+        int choice = rand() % (possibilities_size*2);
+        choice *= choice/(possibilities_size*2);
+        choice -= possibilities_size;
+        choice = (choice < 0) ? -choice : choice;
+        if(choice != 0 && choice < possibilities_size){
+            bonus.push_back(ShipBonus(possibilities[choice]));
+            bonus.back().getSprite().setPosition(it.getSprite().getPosition());
         }
+
     }
 }
 

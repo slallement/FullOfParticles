@@ -1,16 +1,11 @@
 #include "../include/Mission.h"
-#include "../src/missions/MissionState_1.h"
+#include "../include/missions/MissionState_1.h"
 
 Mission::Mission(Game* ref) :
     missionState(MissionStateEnd::getState(this)),
     game(ref), currentPart(0), elapsed(0.f), latencyTime(0.f),
     transition(false), unfinished(true), fail(false)
 {
-    /*bullet = &ref->bullet;
-    winWidth = game->window.getDefaultView().getSize().x;
-    winHeight = game->window.getDefaultView().getSize().y;
-    window = &game->window;
-    layer_game = &game->layer_game;*/
     bg = &game->bg;
 
     context.game = ref;

@@ -22,6 +22,7 @@ class ExplosionParticle
     friend class EffectExplosion;
 };
 
+/* explosion FX */
 class EffectExplosion: public Entity
 {
     public:

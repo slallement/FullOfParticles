@@ -85,20 +85,6 @@ class Mission1 : public Mission
         static constexpr const float endduration = 5.f;
 
         sf::Shader shader;
-        //sf::RenderTexture layer;
-
-        /*int initialLives;
-        sf::Texture splash_tex;
-        sf::Sprite splash1;
-        sf::Sprite splash2;
-        sf::Texture lifebar_tex1;
-        sf::Texture lifebar_tex2;
-        sf::Sprite lifebar;
-        sf::Sprite lifebarBorder;
-        sf::Texture success_tex;
-        sf::Sprite success;
-        float a1,d1,s1,
-        a2,d2,s2;*/
 };
 
 #endif // MISSION_H

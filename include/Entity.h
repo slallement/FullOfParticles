@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+/* Entity */
 class Entity : public sf::Drawable
 {
     public:

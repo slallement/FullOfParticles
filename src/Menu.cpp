@@ -35,13 +35,21 @@ Menu::~Menu()
 
 void Menu::centerTextOnxAxis(sf::Text &txt, float y)
 {
-    txt.setPosition((window.getDefaultView().getSize().x-txt.getGlobalBounds().width)/2.f,y);
+    txt.setPosition((window.getDefaultView().getSize().x-txt.getGlobalBounds().width)/2.f,
+        window.getDefaultView().getSize().y*y);
 }
 
 void Menu::recenterOptions()
 {
     for(unsigned int i=0;i<option.size();++i){
-         centerTextOnxAxis(option[i].txt, option[i].txt.getPosition().y);
+         centerTextOnxAxis(option[i].txt, option[i].txt.getPosition().y/window.getDefaultView().getSize().y);
+    }
+}
+
+void Menu::recenterOptions(sf::Vector2f oldsize)
+{
+    for(unsigned int i=0;i<option.size();++i){
+         centerTextOnxAxis(option[i].txt, option[i].txt.getPosition().y/oldsize.y);
     }
 }
 
@@ -61,7 +69,7 @@ void Menu::run()
     if(!shad_blur.loadFromFile("shaders/gblur.vert", "shaders/gblur.frag")){
         shadersOk = false;
     }else{
-        shad_blur.setParameter("texture_size",0.8f*sf::Vector2f(render.getSize())); // 0.8 -> inverse size of blur
+        shad_blur.setParameter("texture_size", 0.8f*sf::Vector2f(render.getSize())); // 0.8 -> inverse size of blur
     }
     toogle_blur = 0;
 

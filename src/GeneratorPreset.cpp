@@ -507,11 +507,11 @@ void Generator10::launch()
 
     int m = 7;
     const sf::Vector2f offset(0.01f,0.15f);
-    const float subdiv = Utils::WINDOWS_HEIGHT*(1.f-offset.y*2.f)/(m-1.f);
-    const float aperture = asin(subdiv/Utils::WINDOWS_WIDTH) * 0.8f;
+    const float subdiv = Config::WINDOWS_HEIGHT*(1.f-offset.y*2.f)/(m-1.f);
+    const float aperture = asin(subdiv/Config::WINDOWS_WIDTH) * 0.8f;
     for(int i=0;i<m;++i) {
-        sf::Vector2f pos(Utils::WINDOWS_WIDTH*offset.x,
-                         Utils::WINDOWS_HEIGHT*offset.y+i*subdiv);
+        sf::Vector2f pos(Config::WINDOWS_WIDTH*offset.x,
+                         Config::WINDOWS_HEIGHT*offset.y+i*subdiv);
 
 
         bullet->push_back(Bullet());

@@ -30,7 +30,6 @@ class MainMenu : public Menu
         virtual void loadBackground();
         virtual void drawMenu();
 
-        MissionMenu missionMenu;
         sf::Clock elapsed;
         sf::Shader shad_blur;
         sf::Sprite title;

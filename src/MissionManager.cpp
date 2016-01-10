@@ -1,4 +1,5 @@
 #include "../include/MissionManager.h"
+#include "../include/missions/MissionState_1.h"
 
 std::ostream& operator<<(std::ostream & os,const MissionFileState &m){
     os<<"m"<<m.id<<std::endl<<static_cast<int>(m.state)<<std::endl;

@@ -25,12 +25,12 @@ file(GLOB PROJECT_SRC
 )
 file(GLOB PROJECT_HEADER
     "include/*.h"
-    "src/missions/*.h"
+    "include/missions/*.h"
 )
 
 # Define sources and executable
 set(EXECUTABLE_NAME "FullOfParticle")
-add_executable(${EXECUTABLE_NAME} main.cpp ${PROJECT_SRC})
+add_executable(${EXECUTABLE_NAME} main.cpp ${PROJECT_SRC} ${PROJECT_HEADER})
 
 
 # Detect and add SFML

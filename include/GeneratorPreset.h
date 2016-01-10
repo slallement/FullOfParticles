@@ -3,6 +3,7 @@
 
 #include "Generator.h"
 #include "Utils.h"
+#include "Config.h"
 
 class Generator1 : public Generator
 {

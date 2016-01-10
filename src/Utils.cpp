@@ -2,8 +2,7 @@
 #include <cmath>
 #include <iostream>
 // ---
-unsigned int Utils::WINDOWS_WIDTH  = 1600;
-unsigned int Utils::WINDOWS_HEIGHT = 900;
+
 
 float Utils::cosineInterpolate(float y1, float y2, float x)
 {

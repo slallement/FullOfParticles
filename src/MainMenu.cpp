@@ -2,50 +2,50 @@
 #include "../include/MissionMenu.h"
 
 MainMenu::MainMenu(sf::RenderWindow & win):
-    Menu(win), missionMenu(win)
+    Menu(win)
 {
     FontManager::getFont("ressources/Symtext.ttf");
     this->loadBackground();
 
-    window.create(sf::VideoMode(Utils::WINDOWS_WIDTH, Utils::WINDOWS_HEIGHT), "Dodger King");
+    window.create(sf::VideoMode(Config::WINDOWS_WIDTH, Config::WINDOWS_HEIGHT), "Full of Particles");
     sf::Image icon;
     if(icon.loadFromFile("ressources/icon.png"))
         window.setIcon(256,256,icon.getPixelsPtr());
 
     sf::Text t = sf::Text("Start Mission",*FontManager::getFont("ressources/Symtext.ttf"),32);
-    centerTextOnxAxis(t,300.f);
 
-    option.resize(3);
-    option[0].txt = t;
-    option[0].f = static_cast<void (Menu::*)()>(&MainMenu::runGame);
+    option.reserve(3);
+    option.push_back(Button());
+    option.back().txt = t;
+    option.back().f = static_cast<void (Menu::*)()>(&MainMenu::runGame);
 
-    t.setString("Exit");
-    centerTextOnxAxis(t,600.f);
-    option[1].txt = t;
-    option[1].f = static_cast<void (Menu::*)()>(&MainMenu::exit);
-
-    option[2].txt = t;
-    option[2].txt.setString("Mode : windowed");
-    centerTextOnxAxis(option[2].txt,400.f);
-    option[2].f = static_cast<void (Menu::*)()>(&MainMenu::mode);
+    t.setString("Options");
+    option.push_back(Button());
+    option.back().txt = t;
+    option.back().f = static_cast<void (Menu::*)()>(&MainMenu::mode);
 
     #ifdef DEBUG
     option.push_back(Button());
     t.setString("visualize");
-    centerTextOnxAxis(t,500.f);
+    centerTextOnxAxis(t,500.f/800.0f);
     option.back().txt = t;
     option.back().f = static_cast<void (Menu::*)()>(&MainMenu::visualize);
 
     option.push_back(Button());
     t.setString("learn");
-    centerTextOnxAxis(t,700.f);
+    centerTextOnxAxis(t,700.f/800.0f);
     option.back().txt = t;
     option.back().f = static_cast<void (Menu::*)()>(&MainMenu::learningMode);
     #endif
 
+    t.setString("Exit");
+    option.push_back(Button());
+    option.back().txt = t;
+    option.back().f = static_cast<void (Menu::*)()>(&MainMenu::exit);
+
     title.setTexture(*TextureManagerGlobal::getTexture("ressources/img/title.png"));
-    title.setPosition((window.getDefaultView().getSize().x-title.getGlobalBounds().width)/2.f,title.getPosition().y);
     window.setFramerateLimit(60);
+    initPosition();
 }
 
 void MainMenu::loadBackground()
@@ -71,8 +71,19 @@ MainMenu::~MainMenu()
     //dtor
 }
 
+void MainMenu::initPosition(){
+    Menu::initPosition();
+    for(unsigned int i=0;i<option.size();++i){
+        centerTextOnxAxis(option[i].txt,0.25f+0.75f*(1.f*(1+i)/(1+option.size())));
+    }
+    float titlescale = 0.4f*window.getDefaultView().getSize().y/title.getTextureRect().height;
+    title.setScale(titlescale,titlescale);
+    title.setPosition((window.getDefaultView().getSize().x-title.getGlobalBounds().width)/2.f,0.0f);
+}
+
 void MainMenu::runGame()
 {
+    MissionMenu missionMenu(window);
     missionMenu.run();
 }
 
@@ -94,15 +105,6 @@ void MainMenu::learningMode()
     static_cast<GameLearn*>(game)->learn();
     delete game;
     game = NULL;
-}
-
-void MainMenu::initPosition(){
-    Menu::initPosition();
-    recenterOptions();
-    title.setPosition((window.getDefaultView().getSize().x-title.getGlobalBounds().width)/2.f,title.getPosition().y);
-
-    //render.create(window.getSize().x,window.getSize().y);
-    //render2.create(window.getSize().x,window.getSize().y);
 }
 
 void MainMenu::mode()

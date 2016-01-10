@@ -30,7 +30,6 @@ void ShipShield::hit(int nb)
         t1 = 1.f;
     }else{
         ship.hit(nb-defense);
-        //Ship::hit(nb-defense);
         defense = 0;
     }
 }
