@@ -33,14 +33,19 @@ struct ScheduledShip
 {
     //ScheduledShip(float t, Ship* s) : time(t),ship(s)) {}
     ScheduledShip() : time(-1),pos(-100.f,-100.f),ship(0) {}
+    /** Spawn time */
     float time;
+    /** Initial position */
     sf::Vector2f pos;
+    /** Ship to spawn */
     ShipEnemy* ship;
+    /** Compare ScheduledShip by spawn time */
     static bool comp(const ScheduledShip& s1,const ScheduledShip& s2){
-        return s1.time<s2.time;
+        return s1.time < s2.time;
     }
 };
 
+/** Core class of the game, contain the main loop */
 class Game
 {
     public:
@@ -121,7 +126,7 @@ class Game
         BigImage bg;
         sf::Event event;
 
-         sf::Clock elapsed_info;
+        sf::Clock elapsed_info;
 
     private:
 };

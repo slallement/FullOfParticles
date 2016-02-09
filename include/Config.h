@@ -1,6 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+/** Configuration namespace */
 namespace Config {
     constexpr char TITLE_WINDOW[] = "Full of particles";
 

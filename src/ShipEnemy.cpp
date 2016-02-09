@@ -36,16 +36,6 @@ void ShipEnemy::setVyBehavior(float (*f)(float))
     static_cast<BehaviorFunction*>(behavior)->setFy(f);
 }
 
-/*void ShipEnemy::setVxBehavior(float (*f)(float))
-{
-    fvx = f;
-}
-
-void ShipEnemy::setVyBehavior(float (*f)(float))
-{
-    fvy = f;
-}*/
-
 ShipEnemy& ShipEnemy::operator=(const ShipEnemy& copy)
 {
     (Ship)*this = copy;
@@ -65,7 +55,6 @@ ShipEnemy& ShipEnemy::operator=(const ShipEnemy& copy)
         weapons.back()->linkTo(this);
     }*/
     //delete behavior;
-    std::cout<<"ok3"<<std::endl;
     if(copy.behavior){
         behavior = copy.behavior->clone(&v);
     }else{
@@ -82,7 +71,6 @@ ShipEnemy::ShipEnemy(ShipEnemy const& copy) :
     }else{
         behavior = new BehaviorNull();
     }
-
 }
 
 void ShipEnemy::update(float dt)

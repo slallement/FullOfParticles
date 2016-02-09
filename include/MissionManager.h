@@ -7,6 +7,7 @@
 #include "Mission.h"
 #include "Game.h"
 
+/** Class containing a state of the mission (complete, locked, ...) */
 class MissionFileState
 {
     protected:
@@ -23,6 +24,7 @@ class MissionFileState
 
 std::ostream& operator<<(std::ostream & os, const MissionFileState &m);
 
+/** Class to manage de save file */
 class MissionManager
 {
     public:

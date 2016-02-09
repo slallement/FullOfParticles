@@ -260,7 +260,6 @@ bool Game::run()
         window.setFramerateLimit(FR_LIMIT);
 
         currentMode = mission->getMode();
-        //elapsed.restart();
 
     }catch(const std::exception &e){
         std::cerr<<e.what()<<std::endl;
@@ -275,11 +274,11 @@ bool Game::run()
 
     elapsed_info.restart();
 
+    // Main loop 
     while (window.isOpen() && mission->isContinuing())
     {
         //float time = elapsed.getElapsedTime().asSeconds();
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed){
                 mission->abort();
                 window.close();
@@ -287,9 +286,7 @@ bool Game::run()
             }
             if (event.type == sf::Event::Resized){
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-            }
-            else
-            if (event.type == sf::Event::KeyPressed){
+            } else if (event.type == sf::Event::KeyPressed){
                 if (event.key.code == sf::Keyboard::G){
                     return true;
                 }
@@ -298,8 +295,7 @@ bool Game::run()
         }
 
         manageMission();
-        if(player.getLives() <= 0)
-        {
+        if(player.getLives() <= 0){
             mission->abort();
             continue;
         }
@@ -321,18 +317,19 @@ bool Game::run()
             // draw enemies bullet
             layer_bullet_enemies.clear(sf::Color::Transparent);
 
-            if(bullet.size() > 0)
+            if(bullet.size() > 0){
                 for(int i=(int)(bullet.size())-1;i>=0;i--){
                     bullet[i].update(dt);
                     layer_bullet_enemies.draw(bullet[i]);
                 }
-
+            }
             // draw player bullets
-            if( bulletPlayer.size() > 0)
+            if( bulletPlayer.size() > 0){
                 for(int i=(int)bulletPlayer.size()-1;i>=0;i--){
                     bulletPlayer[i].update(dt);
                     layer_game.draw(bulletPlayer[i]);
                 }
+            }
             layer_bullet_enemies.display();
 
             layer_game.draw(sf::Sprite(layer_bullet_enemies.getTexture()));
@@ -554,13 +551,13 @@ void Game::manageBulletCollision(){
 inline void Game::putBonus(Ship& it)
 {
     if(it.getLivesMax() > 1){
-
         int points = it.getLivesMax();
         static const unsigned int possibilities[] = {0,
                                             ShipBonus::SHILED_LV1,
                                             ShipBonus::LIFE_LV1,
                                             ShipBonus::IMPROVE_RATE1};
-        static const unsigned int possibilities_size = sizeof(possibilities)/sizeof(possibilities[0]);
+        static const unsigned int possibilities_size 
+                = sizeof(possibilities)/sizeof(possibilities[0]);
         int choice = rand() % (possibilities_size*2);
         choice *= choice/(possibilities_size*2);
         choice -= possibilities_size;
@@ -589,7 +586,7 @@ inline void Game::manageBonus()
         {
             bonus[i].affect(player);
             bonus.erase(bonus.begin()+i);
-            i++;
+            ++i;
         }
     }
 }
@@ -602,8 +599,7 @@ unsigned int Game::getFrameRate()
     static sf::Clock clock;
     frameTime += clock.restart().asSeconds();
     frameCounter++;
-    if(frameTime >= 1.f)
-    {
+    if(frameTime >= 1.f){
         fps = frameCounter;
         frameCounter = 0;
         frameTime -= 1.f;
@@ -626,8 +622,9 @@ int Game::getRemainingEnnemyLife() const {
 }
 
 int Game::getRemainingEnnemyLifeMax() const {
-    if(enemies.size()<=0)
+    if(enemies.size()<=0){
         return 0;
+    }
     int r=0;
     for(std::list<ShipEnemy>::const_iterator it=enemies.begin();
             it!=enemies.end();

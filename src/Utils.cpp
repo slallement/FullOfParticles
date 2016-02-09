@@ -38,6 +38,8 @@ std::vector<sf::Vector2f> Utils::getPathFractionned(std::vector<sf::Vector2f> co
     return res;
 }
 
-float id(float x){return x;}
+float id(float x){
+    return x;
+}
 
 

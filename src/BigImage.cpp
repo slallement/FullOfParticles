@@ -51,39 +51,39 @@ void BigImage::load(sf::Image const& img, int nsize)
             sf::Vertex* quad = &plane[(i + j * (slicex+1)) * 4];
 
             quad[0].position = sf::Vector2f(size*i,size*j);
-            quad[1].position  = sf::Vector2f(size*(i+1),size*j);
-            quad[2].position  = sf::Vector2f(size*(i+1),size*(j+1));
-            quad[3].position  = sf::Vector2f(size*i,size*(j+1));
+            quad[1].position = sf::Vector2f(size*(i+1),size*j);
+            quad[2].position = sf::Vector2f(size*(i+1),size*(j+1));
+            quad[3].position = sf::Vector2f(size*i,size*(j+1));
         }
     }
     j = slicey;
     for(i=0;i<slicex;i++){
         sf::Vertex* quad = &plane[(i + j * (slicex+1)) * 4];
         quad[0].position = sf::Vector2f(size*i,-size);
-        quad[1].position  = sf::Vector2f(size*(i+1),-size);
-        quad[2].position  = sf::Vector2f(size*(i+1),0);
-        quad[3].position  = sf::Vector2f(size*i,0);
+        quad[1].position = sf::Vector2f(size*(i+1),-size);
+        quad[2].position = sf::Vector2f(size*(i+1),0);
+        quad[3].position = sf::Vector2f(size*i,0);
     }
     i = slicex;
     for(j=0;j<slicey;j++){
         sf::Vertex* quad = &plane[(i + j * (slicex+1)) * 4];
 
         quad[0].position = sf::Vector2f(-size,size*j);
-        quad[1].position  = sf::Vector2f(0,size*j);
-        quad[2].position  = sf::Vector2f(0,size*(j+1));
-        quad[3].position  = sf::Vector2f(-size,size*(j+1));
+        quad[1].position = sf::Vector2f(0,size*j);
+        quad[2].position = sf::Vector2f(0,size*(j+1));
+        quad[3].position = sf::Vector2f(-size,size*(j+1));
     }
     {
         sf::Vertex* quad = &plane[(slicex + slicey * (slicex+1)) * 4];
 
-        quad[0].position  = sf::Vector2f(-size,-size);
-        quad[1].position  = sf::Vector2f(0,-size);
-        quad[2].position  = sf::Vector2f(0,0);
-        quad[3].position  = sf::Vector2f(-size,0);
+        quad[0].position = sf::Vector2f(-size,-size);
+        quad[1].position = sf::Vector2f(0,-size);
+        quad[2].position = sf::Vector2f(0,0);
+        quad[3].position = sf::Vector2f(-size,0);
     }
 
     for(i=0;i<(slicex+1)*(slicey+1);i++){
-        plane[4*i].texCoords = sf::Vector2f(0,0);
+        plane[4*i  ].texCoords = sf::Vector2f(0,0);
         plane[4*i+1].texCoords = sf::Vector2f(size,0);
         plane[4*i+2].texCoords = sf::Vector2f(size,size);
         plane[4*i+3].texCoords = sf::Vector2f(0,size);
@@ -96,10 +96,10 @@ void BigImage::scroll(float step){
     if(pos.y<0){
         pos.y = size;
         offsety--;
-        if(offsety<0)
+        if(offsety<0){
             offsety = slicey-1;
-    }else
-    if(pos.y>=(float)size){
+        }
+    }else if(pos.y>=(float)size){
         offsety++;
         pos.y-=size;
         if(offsety>=slicey)
@@ -114,8 +114,7 @@ void BigImage::scrollHor(float step){
         offsetx--;
         if(offsetx<0)
             offsetx = slicex-1;
-    }else
-    if(pos.x>=(float)size){
+    }else if(pos.x>=(float)size){
         offsetx++;
         pos.x-=size;
         if(offsetx>=slicex)

@@ -18,6 +18,7 @@ struct Button
     void (Menu::*f)();
 };
 
+/** Generic class for all menus */
 class Menu
 {
     public:
@@ -56,8 +57,6 @@ class Menu
         sf::Sprite sprite, sprite2;
         sf::Shader shad_blur;
         int toogle_blur;
-
-
 
         std::vector<BigImage> bg;
 

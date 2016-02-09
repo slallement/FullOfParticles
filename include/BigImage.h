@@ -6,6 +6,7 @@
 #include <cmath>
 #include <string>
 
+/** A class to manage big textures (like thoses used for the background) */
 class BigImage : public sf::Drawable, public sf::Transformable
 {
     public:
@@ -13,12 +14,15 @@ class BigImage : public sf::Drawable, public sf::Transformable
         BigImage(std::string imagepath);
         virtual ~BigImage();
         BigImage(sf::Image & img);
+        /** Load an image and slice it in nsize*nsize sub textures */
         void load(sf::Image const& img, int nsize=1024*2);
         /*void setWindowSize(sf::Vector2u const& win){
             onscreenx = ceil((float)win.x/size)+1;
             onscreeny = ceil((float)win.y/size)+1;
         }*/
+        /** Scroll on the y axis from "step" pixels */
         void scroll(float step);
+        /** Scroll on the x axis from "step" pixels */
         void scrollHor(float step);
 
     protected:
@@ -27,8 +31,6 @@ class BigImage : public sf::Drawable, public sf::Transformable
         int slicex;
         int slicey;
         int size;
-        //int onscreenx;
-        //int onscreeny;
         sf::Vector2f pos;
         int offsety;
         int offsetx;
