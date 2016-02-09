@@ -2,6 +2,7 @@
 #define BULLETMODIFIER_H
 
 #include "Utils.h"
+#include "TextureManager.h"
 #include "Entity.h"
 #include "Bullet.h"
 #include <deque>

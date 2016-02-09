@@ -2,9 +2,7 @@
 #define SHIPBONUS_H
 
 #include "PlayerShip.h"
-//#include "Utils.h"
 #include <stdint.h>
-#include "Generator.h"
 
 class ShipBonus : public Entity
 {

@@ -3,6 +3,7 @@
 
 #include "Generator.h"
 #include "Entity.h"
+#include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 

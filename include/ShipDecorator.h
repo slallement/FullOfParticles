@@ -3,6 +3,7 @@
 
 #include "Utils.h"
 #include "Ship.h"
+#include "TextureManager.h"
 
 class ShipDecorator : public Ship
 {

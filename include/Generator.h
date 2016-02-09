@@ -9,6 +9,7 @@
 #include "Bullet.h"
 #include "Utils.h"
 #include "Entity.h"
+#include "TextureManager.h"
 
 /* Bullet emitter (particles that can damage the player) */
 class Generator : public Entity

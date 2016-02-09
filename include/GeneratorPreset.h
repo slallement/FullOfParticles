@@ -2,6 +2,7 @@
 #define GENERATORPRESET_H
 
 #include "Generator.h"
+#include "TextureManager.h"
 #include "Utils.h"
 #include "Config.h"
 

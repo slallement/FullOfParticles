@@ -1,8 +1,9 @@
-#include "include/MainMenu.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "include/MainMenu.h"
 #include "include/Utils.h"
 #include "include/Config.h"
+#include "include/TextureManager.h"
 
 int main()
 {

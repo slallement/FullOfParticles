@@ -13,6 +13,7 @@
 #include "Utils.h"
 #include "Game.h"
 #include "BigImage.h"
+#include "TextureManager.h"
 
 class MissionState;
 class Game;

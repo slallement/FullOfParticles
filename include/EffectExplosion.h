@@ -2,6 +2,7 @@
 #define EFFECTEXPLOSION_H
 
 #include "Entity.h"
+#include "TextureManager.h"
 #include <SFML/System.hpp>
 #include <deque>
 

@@ -1,4 +1,6 @@
 #include "../include/ShipBonus.h"
+#include "../include/TextureManager.h"
+#include "../include/Generator.h"
 
 ShipBonus::ShipBonus()
 {
